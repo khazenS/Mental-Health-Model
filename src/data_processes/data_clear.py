@@ -79,7 +79,7 @@ def one_hot_encode_column(df, column_name, prefix):
     if column_name not in df.columns:
         raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
     
-    one_hot = pd.get_dummies(df[column_name], prefix=prefix)
+    one_hot = pd.get_dummies(df[column_name], prefix=prefix,dtype='int')
     df = pd.concat([df, one_hot], axis=1)
     return df
 def df_numeric_scaler(df, column_name, scaler):
