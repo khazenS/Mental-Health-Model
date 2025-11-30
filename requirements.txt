@@ -2,3 +2,5 @@ pandas
 kagglehub
 matplotlib
 scipy
+seaborn
+scikit-learn

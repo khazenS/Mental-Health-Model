@@ -38,7 +38,6 @@ for col in df.select_dtypes(include='object').columns:
         df[col] = df[col].str.strip()
 
 
-#“The Diet Type column is important for both the Happiness Score and Depression Risk prediction. 
 # To use this column, we need to convert it to a numerical type. Therefore, we will apply one-hot encoding.”
 
 # One-hot encoding
