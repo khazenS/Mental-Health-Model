@@ -1,6 +1,8 @@
 from src.data_processes.data_loader import data_loader
 from src.data_processes.data_analyze import initial_data_analyze,show_null_counts,seperate_variables,check_outliers,show_categoricals_distribution,show_numerical_distribution
-from src.data_processes.data_clear import convert_na_to_unknown,datas_to_lowercase,strip_leading_trailing_spaces,ordinal_encode_column
+from src.data_processes.data_clear import convert_na_to_unknown,datas_to_lowercase,strip_leading_trailing_spaces,ordinal_encode_column,one_hot_encode_column,df_numeric_scaler
+from sklearn.preprocessing import MinMaxScaler
+
 def main():
     # Load the raw data
     raw_df = data_loader()
@@ -48,13 +50,29 @@ def main():
     #We will add the transformed numerical values as new columns while keeping the original columns.
     processed_df = ordinal_encode_column(processed_df, 'Exercise Level', {'low':1 , 'moderate':2, 'high':3})
     processed_df = ordinal_encode_column(processed_df, 'Stress Level', {'low':1 , 'moderate':2, 'high':3})
-    # As additional, we will ordinal encode Gender column
-    processed_df = ordinal_encode_column(processed_df, 'Gender', {'male':1 , 'female':0,})
-    print(processed_df['Gender'].value_counts())
+    # After ordinal encoding, we can drop the original categorical columns if needed.
+    processed_df = processed_df.drop(columns=['Exercise Level', 'Stress Level'])
+
+    # We will apply one-hot encoding because there is no ordinal relationship between categories.
+    # One-hot encoding for 'Diet Type' column
+    processed_df = one_hot_encode_column(processed_df, 'Diet Type', 'diet')
+    # One-hot encoding for 'Mental Health Condition' column
+    processed_df = one_hot_encode_column(processed_df, 'Mental Health Condition', 'mhc')
+    # One-hot encoding for 'Gender' column
+    processed_df = one_hot_encode_column(processed_df, 'Gender', 'gender')
+    # One-hot encoding for 'Country' column
+    processed_df = one_hot_encode_column(processed_df, 'Country', 'country')
     
-    print(60 * '-')
+    # After one-hot encoding, we can drop the original categorical columns if needed.
+    processed_df = processed_df.drop(columns=['Diet Type', 'Mental Health Condition', 'Gender', 'Country'])
 
-    print(processed_df['Stress Level'].value_counts())
-
+    # We should scale all numerical columns before modeling because 
+    # for example age(18-64) and sleep hours (1.5-11.3) should be evaulated equally.
+    scaler = MinMaxScaler()
+    for col in numerical_cols:
+        processed_df = df_numeric_scaler(processed_df, col, scaler)
+    
+    print("Processed DataFrame Info:")
+    print(processed_df.info())
 if __name__ == "__main__":
     main()
