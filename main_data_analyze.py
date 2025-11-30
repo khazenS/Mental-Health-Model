@@ -1,5 +1,5 @@
 from src.data_processes.data_loader import data_loader
-from src.data_processes.data_analyze import initial_data_analyze,show_null_counts,seperate_variables,check_outliers,show_categoricals_distribution,show_numerical_distribution
+from src.data_processes.data_analyze import initial_data_analyze,show_null_counts,seperate_variables,check_outliers,show_categoricals_distribution,show_numerical_distribution,create_correlation_heatmap
 from src.data_processes.data_clear import convert_na_to_unknown,datas_to_lowercase,strip_leading_trailing_spaces,ordinal_encode_column,one_hot_encode_column,df_numeric_scaler
 from sklearn.preprocessing import MinMaxScaler
 
@@ -74,5 +74,12 @@ def main():
     
     print("Processed DataFrame Info:")
     print(processed_df.info())
+
+    #Hear,we start corelation analysis and heat map.
+
+    #We created a new DataFrame that contains only the numerical columns from the original DataFrame. 
+    # Then, we generated its correlation matrix.
+    create_correlation_heatmap(processed_df)
+
 if __name__ == "__main__":
     main()

@@ -4,6 +4,7 @@ from scipy import stats
 import os 
 import math
 import seaborn as sns
+
 # Initial data analysis function
 def initial_data_analyze(df):
     print("DataFrame Head:")
@@ -231,3 +232,21 @@ def check_outliers(df,numerical_cols):
     plt.close() # Clear memory
 
     print(f"\nOutlier boxplots saved to {save_path}")
+
+def create_correlation_heatmap(df):
+    """
+    Creates and displays a correlation heatmap for numerical columns in the DataFrame.
+    
+    Parameters:
+    df (pd.DataFrame): The input DataFrame containing the data.
+    
+    Returns: None
+    """
+    numerical_df = df.select_dtypes(include=['int64', 'float64', 'int32', 'uint8'])
+    corr_matrix = numerical_df.corr()
+    print(corr_matrix)
+
+    plt.figure(figsize=(12,10))
+    sns.heatmap(corr_matrix,annot=True,fmt=".2f", cmap="coolwarm",linewidths=.5)
+    plt.title('Correlation Heatmap Between Variables', fontsize=18)
+    plt.show()
