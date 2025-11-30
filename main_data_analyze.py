@@ -2,7 +2,7 @@ from src.data_processes.data_loader import data_loader
 from src.data_processes.data_analyze import initial_data_analyze,show_null_counts,seperate_variables,check_outliers,show_categoricals_distribution,show_numerical_distribution,create_correlation_heatmap
 from src.data_processes.data_clear import convert_na_to_unknown,datas_to_lowercase,strip_leading_trailing_spaces,ordinal_encode_column,one_hot_encode_column,df_numeric_scaler
 from sklearn.preprocessing import MinMaxScaler
-
+import os 
 def main():
     # Load the raw data
     raw_df = data_loader()
@@ -62,10 +62,8 @@ def main():
     processed_df = one_hot_encode_column(processed_df, 'Gender', 'gender')
     # One-hot encoding for 'Country' column
     processed_df = one_hot_encode_column(processed_df, 'Country', 'country')
-    
     # After one-hot encoding, we can drop the original categorical columns if needed.
     processed_df = processed_df.drop(columns=['Diet Type', 'Mental Health Condition', 'Gender', 'Country'])
-
     # We should scale all numerical columns before modeling because 
     # for example age(18-64) and sleep hours (1.5-11.3) should be evaulated equally.
     scaler = MinMaxScaler()
@@ -81,5 +79,11 @@ def main():
     # Then, we generated its correlation matrix.
     create_correlation_heatmap(processed_df)
 
+    # Save the processed DataFrame to a CSV file
+    output_dir = "data/processed"
+    os.makedirs(output_dir, exist_ok=True)
+    save_path = os.path.join(output_dir, "processed_df.csv")
+    processed_df.to_csv(save_path, index=False)
+    print(f"Processed DataFrame saved to: {save_path}") 
 if __name__ == "__main__":
     main()

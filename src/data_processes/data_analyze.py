@@ -242,11 +242,18 @@ def create_correlation_heatmap(df):
     
     Returns: None
     """
-    numerical_df = df.select_dtypes(include=['int64', 'float64', 'int32', 'uint8'])
-    corr_matrix = numerical_df.corr()
-    print(corr_matrix)
+    corr_matrix = df.corr()
+
+    # Save the heatmap to the outputs/figure directory
+    output_path = "outputs/figure"
+    os.makedirs(output_path, exist_ok=True)
 
     plt.figure(figsize=(12,10))
-    sns.heatmap(corr_matrix,annot=True,fmt=".2f", cmap="coolwarm",linewidths=.5)
+    sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", linewidths=.5)
     plt.title('Correlation Heatmap Between Variables', fontsize=18)
-    plt.show()
+
+    save_path = os.path.join(output_path, "correlation_heatmap.png")
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    plt.close()
+
+    print(f"Correlation heatmap saved to {save_path}")

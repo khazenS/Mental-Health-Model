@@ -1,3 +1,4 @@
+import pandas as pd
 def convert_na_to_unknown(df, column_name):
     """
     Converts NaN values in the specified column of the DataFrame to 'unknown'.
@@ -63,6 +64,24 @@ def ordinal_encode_column(df, column_name, mapping_dict):
     df[column_name] = df[column_name].map(mapping_dict)
     return df
 
+def one_hot_encode_column(df, column_name, prefix):
+    """
+    One-hot encodes the specified categorical column in the DataFrame.
+
+    Parameters:
+    df (pd.DataFrame): The input DataFrame containing the data.
+    column_name (str): The name of the categorical column to be one-hot encoded.
+    prefix (str): The prefix to use for the new one-hot encoded columns.
+
+    Returns:
+    pd.DataFrame: The DataFrame with the specified column one-hot encoded.
+    """
+    if column_name not in df.columns:
+        raise ValueError(f"Column '{column_name}' does not exist in the DataFrame.")
+    
+    one_hot = pd.get_dummies(df[column_name], prefix=prefix)
+    df = pd.concat([df, one_hot], axis=1)
+    return df
 def df_numeric_scaler(df, column_name, scaler):
     """
     Scales the specified numerical column in the DataFrame using the provided scaler.
