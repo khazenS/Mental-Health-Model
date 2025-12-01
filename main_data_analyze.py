@@ -3,6 +3,7 @@ from src.data_processes.data_analyze import initial_data_analyze,show_null_count
 from src.data_processes.data_clear import convert_na_to_unknown,datas_to_lowercase,strip_leading_trailing_spaces,ordinal_encode_column,one_hot_encode_column,df_numeric_scaler
 from sklearn.preprocessing import MinMaxScaler
 import os 
+import joblib
 def main():
     # Load the raw data
     raw_df = data_loader()
