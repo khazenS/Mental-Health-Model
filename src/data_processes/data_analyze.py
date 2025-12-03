@@ -95,7 +95,7 @@ def show_categoricals_distribution(df, categorical_cols):
         plt.tight_layout()
 
         # Save the figure to the outputs/figure directory
-        output_dir = "outputs/figure/"
+        output_dir = "outputs/figure/analyze/"
         os.makedirs(output_dir, exist_ok=True)
         
         save_path = os.path.join(output_dir, "categorical_distributions_combined.png")
@@ -159,7 +159,7 @@ def show_numerical_distribution (df, numerical_cols):
         plt.tight_layout()
 
         # Save the figure to the outputs/figure directory
-        output_dir = "outputs/figure/"
+        output_dir = "outputs/figure/analyze/"
         os.makedirs(output_dir, exist_ok=True)
 
         save_path = os.path.join(output_dir, "numerical_distributions_combined.png")
@@ -223,7 +223,7 @@ def check_outliers(df,numerical_cols):
     plt.tight_layout()
 
     # Save the figure to the outputs/figure directory
-    output_dir = "outputs/figure/"
+    output_dir = "outputs/figure/analyze/"
     os.makedirs(output_dir, exist_ok=True)
     
     save_path = os.path.join(output_dir, "all_outliers_boxplot.png")
@@ -245,7 +245,7 @@ def create_correlation_heatmap(df):
     corr_matrix = df.corr()
 
     # Save the heatmap to the outputs/figure directory
-    output_path = "outputs/figure"
+    output_path = "outputs/figure/analyze/"
     os.makedirs(output_path, exist_ok=True)
 
     plt.figure(figsize=(12,10))

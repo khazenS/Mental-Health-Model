@@ -51,8 +51,6 @@ def main():
     #We will add the transformed numerical values as new columns while keeping the original columns.
     processed_df = ordinal_encode_column(processed_df, 'Exercise Level', {'low':1 , 'moderate':2, 'high':3})
     processed_df = ordinal_encode_column(processed_df, 'Stress Level', {'low':1 , 'moderate':2, 'high':3})
-    # After ordinal encoding, we can drop the original categorical columns if needed.
-    processed_df = processed_df.drop(columns=['Exercise Level', 'Stress Level'])
 
     # We will apply one-hot encoding because there is no ordinal relationship between categories.
     # One-hot encoding for 'Diet Type' column
@@ -68,18 +66,22 @@ def main():
     # We should scale all numerical columns before modeling because 
     # for example age(18-64) and sleep hours (1.5-11.3) should be evaulated equally.
     scaler = MinMaxScaler()
-    for col in numerical_cols:
-        processed_df = df_numeric_scaler(processed_df, col, scaler)
-    
+    processed_df[numerical_cols] = scaler.fit_transform(processed_df[numerical_cols])
+
     print("Processed DataFrame Info:")
     print(processed_df.info())
 
     #Hear,we start corelation analysis and heat map.
-
     #We created a new DataFrame that contains only the numerical columns from the original DataFrame. 
     # Then, we generated its correlation matrix.
     create_correlation_heatmap(processed_df)
 
+    # Save the scaler and processed columns for future use in prediction
+    if not os.path.exists('outputs/scalers/'):
+        os.makedirs('outputs/scalers/')
+
+    joblib.dump(scaler, 'outputs/scalers/minmax_scaler.pkl')
+    joblib.dump(list(processed_df.columns), 'outputs/scalers/processed_df_columns.pkl')
     # Save the processed DataFrame to a CSV file
     output_dir = "data/processed"
     os.makedirs(output_dir, exist_ok=True)

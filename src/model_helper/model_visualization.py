@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import os
+
 def feature_importance_visualization(columns, importances, output_path):
     """
     Visualizes and saves the feature importance as a bar plot.
@@ -57,3 +58,35 @@ def real_pred_graph(y_test, y_pred, model_name, output_path):
     plt.savefig(output_path)
 
     print(f"{model_name} : Real vs Predicted plot saved to: {output_path}")
+
+# Model Performance comparison plot for multiple metrics but for classification models
+def visualize_model_performance(df_results, output_path="outputs/reports/classification_model_comparison_all_metrics.png"):
+    # 1. Convert data from "Wide" format to "Long" format (for Seaborn hue usage)
+    # id_vars='Model Name' -> X axis will have model names
+    df_melted = df_results.melt(
+        id_vars='Model Name', 
+        value_vars=['Accuracy', 'ROC_AUC', 'F1_Depression'], 
+        var_name='Metric', 
+        value_name='Score'
+    )
+
+    plt.figure(figsize=(10, 6))
+    
+    # 2. By setting hue='Metric', we plot the metrics side by side for each model
+    sns.barplot(x='Model Name', y='Score', hue='Metric', data=df_melted, palette='viridis')
+
+    plt.title('Model Performance Comparison')
+    plt.ylim(0, 1.1) # Add space above the legend and bars  
+    plt.ylabel('Score')
+    plt.xlabel('Model')
+    
+    # Move the legend outside the plot for a cleaner look
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left') 
+    plt.tight_layout()
+
+    # 3. Save the plot
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    plt.savefig(output_path)
+    plt.close()
+
+    print(f"Comparison plot saved to: {output_path}")
