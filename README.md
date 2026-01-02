@@ -1,6 +1,75 @@
 # Mental Health & Lifestyle Analysis Project
 
-This project is an machine learning app that analysis person's lifestyle, mental condition etc. then predict their happiness score and depression risk.
+  Mental health is a complex issue influenced by various lifestyle, work-related, and social factors that are often difficult to analyze using traditional methods. This project aims to explore the relationship between daily life variables and mental health outcomes using machine learning techniques. By applying both regression and classification models, the study predicts mental health conditions, estimates happiness levels, and identifies the most influential factors affecting mental well-being. The project highlights the potential of machine learning as a decision support tool in understanding and analyzing mental health trends.
+
+-Predict mental health conditions based on lifestyle and demographic features
+-Estimate an individual’s happiness score using continuous variables
+-Identify which factors have the strongest influence on mental well-being
+
+##Dataset Description
+The dataset used in this project is a synthetic mental health dataset designed to simulate real-world scenarios. It contains both numerical and categorical features related to lifestyle, work habits, and psychological well-being.
+
+·  Demographic Information
+ - Country
+ - Age
+ - Gender
+
+·  Lifestyle Factors 
+ - Exercise Level
+ - Diet Type
+ - Sleep Hours
+ - Screen Time per Day (Hours)
+ - Social Interaction Score
+
+·  Work & Stress Indicators
+  -Work Hours per Week
+  -Stress Level
+
+·  Mental Health Indicators
+  -Mental Health Condition (e.g., Anxiety, Depression, PTSD)
+  -Happiness Score (target variable for regression tasks)
+
+##Data Preprocessing Procedures
+
+HANDLING MISSING VALUES
+-Missing values in the Mental Health Condition feature were treated as an “Unknown” category.
+-This approach avoids data loss while preserving meaningful information.
+
+ENCODING CATEGORICAL VARIABLES
+Categorical features were transformed using One-Hot Encoding, including:
+-Country
+-Gender
+-Diet Type
+-Mental Health Condition
+
+This step converts categorical variables into numerical format suitable for machine learning algorithms.
+
+FEATURE SCALING
+Numerical features such as:
+-Age
+-Sleep Hours
+-Work Hours per Week
+-Screen Time
+-Social Interaction Score
+-Happiness Score
+were scaled using Min-Max Normalization, bringing all values into the [0, 1] range.
+This prevents features with larger magnitudes from dominating the learning process.
+
+PROCESSED DATASET
+After preprocessing, the final dataset contains only numerical features and is optimized for both regression and classification tasks.
+The processed dataset is stored in:
+ data/processed/processed_df.csv
+
+##Machine Learning Tasks
+This project includes multiple modeling approaches:
+
+.Regression Models
+-Predicting Happiness Score
+
+.Classification Models
+-Predicting Mental Health Condition
+
+Each task is implemented in separate scripts for modularity and clarity.
 
 ## Folder Structure
 
@@ -51,8 +120,7 @@ Again type to terminal for regression models training and outputs of it.
 You can see all summary about models on terminal and also if you wonder about feature importance,real vs prediction distribution etc. 
 look into outputs/figure/regression folder. Model pkl files was saved into outputs/model/regression.
 
-### Classification
-Type to terminal for classification models training and outputs of it.
+
 
 ```python
   python main_classification.py
@@ -60,48 +128,7 @@ Type to terminal for classification models training and outputs of it.
 You can see all models of outputs on terminal and also if you wonder about feature importance look into outputs/figure/classification folder and 
 the summary figure is in outputs/reports.Model pkl files was saved into outputs/model/classification.
 
-### Prediction
-There are 2 type of people to compare outputs of models in real_life_predict.py.
-```python
-  python real_life_predict.py
-```
-If you want to change the parameters of people, do not change structure of person data. It should like ;
-```text
-{
-    'Age': 18,
-    'Sleep Hours': 8,
-    'Work Hours per Week': 22,
-    'Screen Time per Day (Hours)': 2,
-    'Social Interaction Score': 8, 
-    'Happiness Score': 9,
+Conclusion
 
-    'Stress Level': 1,
-    'Exercise Level': 3,
+This project showcases a complete machine learning pipeline, starting from raw data analysis to preprocessing, modeling, and evaluation. It highlights how data-driven approaches can be used to explore complex relationships in mental health and provides a strong foundation for future improvements, such as real-world data integration or deep learning models.
 
-    'diet_balanced': 1,
-    'diet_junk food': 0,
-    'diet_keto': 0,
-    'diet_vegan': 0,
-    'diet_vegetarian': 0,
-
-    'mhc_anxiety': 0,
-    'mhc_bipolar': 0,
-    'mhc_depression': 1,
-    'mhc_ptsd': 0,
-    'mhc_unknown': 0,
-
-    'gender_female': 0,
-    'gender_male': 0,
-    'gender_other': 1,
-
-    'country_australia': 0,
-    'country_brazil': 0,
-    'country_canada': 0,
-    'country_germany': 0,
-    'country_india': 0,
-    'country_japan': 0,
-    'country_usa': 1
-}
-```
-
-You can see the happiness score and depression risk outputs on terminal.
