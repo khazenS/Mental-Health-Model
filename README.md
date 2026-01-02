@@ -119,6 +119,31 @@ Mental_Health_Project/
 └── predict_user.py           # Real prediction file
 ```
 
+## Model Results
+
+We evaluated our models using two distinct pipelines: Classification (for Depression Risk) and Regression (for Happiness Score). Below are the quantitative metrics and visualizations.
+
+### 1. Classification Results (Depression Risk)
+The following table summarizes the performance of models on the test set. Note that **F1-Score** is the critical metric here due to the imbalanced nature of the dataset.
+
+| Model | Accuracy | ROC AUC | F1 Score (Depression) |
+|-------|----------|---------|-----------------------|
+| **Random Forest** | ~0.80 | ~0.48 | 0.00 |
+| **XGBoost** | ~0.61 | ~0.45 | ~0.21 |
+| **Logistic Regression** | ~0.50 | ~0.51 | **~0.27** |
+
+---
+
+### 2. Regression Results (Happiness Score)
+For the regression task, we aimed to predict the continuous Happiness Score. The models were evaluated based on Mean Squared Error (MSE) and R² Score.
+
+| Model | MSE (Lower is better) | R² Score (Higher is better) |
+|-------|----------------------|-----------------------------|
+| **XGBoost (Tuned)** | **0.0831** | **0.0056** |
+| Random Forest (Tuned)| 0.0831 | 0.0051 |
+| Linear Regression | 0.0837 | -0.0010 |
+| Decision Tree (Tuned)| 0.0839 | -0.0043 |
+  
 ## Installation
 
 - Open terminal and join project path. Then install requirements
