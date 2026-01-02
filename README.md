@@ -137,6 +137,7 @@ All of the figures were saved. Also our raw data was preprocessed, path is data/
 
 ## Usage
 The project has totally 2 subtask happiness score (regression) and depression risk (classification) prediction.
+
 ### Regression 
 Again type to terminal for regression models training and outputs of it.
 
@@ -146,7 +147,8 @@ Again type to terminal for regression models training and outputs of it.
 You can see all summary about models on terminal and also if you wonder about feature importance,real vs prediction distribution etc. 
 look into outputs/figure/regression folder. Model pkl files was saved into outputs/model/regression.
 
-
+### Classification
+Type to terminal for classification models training and outputs of it.
 
 ```python
   python main_classification.py
@@ -154,7 +156,49 @@ look into outputs/figure/regression folder. Model pkl files was saved into outpu
 You can see all models of outputs on terminal and also if you wonder about feature importance look into outputs/figure/classification folder and 
 the summary figure is in outputs/reports.Model pkl files was saved into outputs/model/classification.
 
-## Conclusion
+### Prediction
+There are 2 type of people to compare outputs of models in real_life_predict.py.
+```python
+  python real_life_predict.py
+```
+If you want to change the parameters of people, do not change structure of person data. It should like ;
+```text
+{
+    'Age': 18,
+    'Sleep Hours': 8,
+    'Work Hours per Week': 22,
+    'Screen Time per Day (Hours)': 2,
+    'Social Interaction Score': 8, 
+    'Happiness Score': 9,
 
-This project showcases a complete machine learning pipeline, starting from raw data analysis to preprocessing, modeling, and evaluation. It highlights how data-driven approaches can be used to explore complex relationships in mental health and provides a strong foundation for future improvements, such as real-world data integration or deep learning models.
+    'Stress Level': 1,
+    'Exercise Level': 3,
+
+    'diet_balanced': 1,
+    'diet_junk food': 0,
+    'diet_keto': 0,
+    'diet_vegan': 0,
+    'diet_vegetarian': 0,
+
+    'mhc_anxiety': 0,
+    'mhc_bipolar': 0,
+    'mhc_depression': 1,
+    'mhc_ptsd': 0,
+    'mhc_unknown': 0,
+
+    'gender_female': 0,
+    'gender_male': 0,
+    'gender_other': 1,
+
+    'country_australia': 0,
+    'country_brazil': 0,
+    'country_canada': 0,
+    'country_germany': 0,
+    'country_india': 0,
+    'country_japan': 0,
+    'country_usa': 1
+}
+```
+
+- You can see the happiness score and depression risk outputs on terminal.
 
