@@ -8,8 +8,7 @@
 
 ## Dataset Description
 The dataset used in this project is a synthetic mental health dataset designed to simulate real-world scenarios. It contains both numerical and categorical features related to lifestyle, work habits, and psychological well-being.
-This is our dataset:
-https://www.kaggle.com/datasets/atharvasoundankar/mental-health-and-lifestyle-habits-2019-2024/data
+This is our dataset: https://www.kaggle.com/datasets/atharvasoundankar/mental-health-and-lifestyle-habits-2019-2024/data
 
 ·  Demographic Information
  - Country
@@ -71,14 +70,33 @@ The processed dataset is stored in:
 ## Machine Learning Tasks
 This project includes multiple modeling approaches:
 
-  .Regression Models
+  Regression Models
   - Predicting Happiness Score
 
-  .Classification Models
+  Classification Models
   - Predicting Mental Health Condition
 
 Each task is implemented in separate scripts for modularity and clarity.
+## Model Details and Methodology
 
+Model Architecture This project implements a dual-pipeline approach to analyze mental health data:
+
+1. Classification Pipeline (Depression Risk):
+- Goal: Predict the presence of depression (mhc_depression).
+- Models: Logistic Regression, Random Forest, XGBoost.
+- Setup: 80/20 Stratified Split to handle class imbalance.
+
+2. Regression Pipeline (Happiness Score):
+- Goal: Predict the continuous Happiness Score.
+- Models: Linear Regression, Decision Tree, Random Forest, XGBoost.
+- Optimization: Utilized GridSearchCV to tune hyperparameters (e.g., n_estimators, max_depth, learning_rate).
+  
+### Motivation
+
+- Comprehensive Benchmarking: We implemented both linear baselines and complex ensemble methods (Tree-based) to empirically determine the best fit for both categorical and continuous targets.
+- Performance Optimization: For regression, Grid Search was used to minimize Mean Squared Error (MSE) and maximize $R^2$ scores.
+- Explainability: Feature importance analysis is applied across all models to identify the most significant factors contributing to depression risks and happiness levels.
+  
 ## Folder Structure
 
 ```text
