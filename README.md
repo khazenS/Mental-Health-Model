@@ -8,6 +8,8 @@
 
 ## Dataset Description
 The dataset used in this project is a synthetic mental health dataset designed to simulate real-world scenarios. It contains both numerical and categorical features related to lifestyle, work habits, and psychological well-being.
+This is our dataset:
+https://www.kaggle.com/datasets/atharvasoundankar/mental-health-and-lifestyle-habits-2019-2024/data
 
 ·  Demographic Information
  - Country
@@ -33,8 +35,8 @@ The dataset used in this project is a synthetic mental health dataset designed t
 
 HANDLING MISSING VALUES
 
-  -Missing values in the Mental Health Condition feature were treated as an “Unknown” category.
-  -This approach avoids data loss while preserving meaningful information.
+  - Missing values in the Mental Health Condition feature were treated as an “Unknown” category.
+  - This approach avoids data loss while preserving meaningful information.
 
 ENCODING CATEGORICAL VARIABLES
   Categorical features were transformed using One-Hot Encoding, including:
